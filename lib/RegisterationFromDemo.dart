@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/userInfo.dart';
 
 class RegisterationDemo extends StatefulWidget {
   const RegisterationDemo({Key? key}) : super(key: key);
@@ -22,27 +25,25 @@ class RegisterationDemoState extends State<RegisterationDemo> {
   String gender = 'male';
   bool dancing = false;
   bool coding = false;
-  bool singing= false;
-
+  bool singing = false;
 
   TextEditingController emailCotroller = TextEditingController();
   TextEditingController fNameCotroller = TextEditingController();
   TextEditingController lNameCotroller = TextEditingController();
   TextEditingController mobileNumCotroller = TextEditingController();
-
+  String dropdownValue = 'A+';
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
-        drawer: Drawer(
-        ),
+        drawer: Drawer(),
         appBar: AppBar(
           centerTitle: true,
-        title: const Text('Rgistration app'),
-          actions: const [Icon(Icons.settings),
-        Icon(Icons.notifications),
+          title: const Text('Rgistration app'),
+          actions: const [
+            Icon(Icons.settings),
+            Icon(Icons.notifications),
           ],
         ),
         body: SingleChildScrollView(
@@ -52,6 +53,12 @@ class RegisterationDemoState extends State<RegisterationDemo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Container(
+                    height: 100,
+                    width: 150,
+                    child: Image.network('https://img.freepik.com/free-vector/'
+                        'color-wing-transparent-set_1284-8933.jpg?size=626&ext=jpg'),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -201,6 +208,37 @@ class RegisterationDemoState extends State<RegisterationDemo> {
                     height: 10,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('select Blood group', style: style_text(foSize: 20)),
+                      DropdownButton<String>(
+                        elevation: 3,
+                        focusColor: Colors.grey,
+                        iconEnabledColor: Colors.blueGrey,
+                        value: dropdownValue,
+                        icon: const Icon(Icons.arrow_downward),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownValue = newValue!;
+                          });
+                        },
+                        items: <String>['A+', 'AB+', 'O+', 'B+', 'B-', 'AB-']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                  Row(
                     children: [
                       const Expanded(
                         flex: 1,
@@ -308,52 +346,90 @@ class RegisterationDemoState extends State<RegisterationDemo> {
                   ),
                   MaterialButton(
                     onPressed: () {
-                      setState(() {
+                      if (Platform.isAndroid) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserInfo(
+                                email: emailCotroller.text,
+                                first_name: fNameCotroller.text,
+                                last_name: lNameCotroller.text,
+                                genderSelect: gender,
+                                mobile_number: mobileNumCotroller.text,
+                                dv: dropdownValue),
+                          ),
+                        );
+                      } else {
+                        Navigator.of(context).push(
+                          CupertinoPageRoute(
+                            builder: (context) => UserInfo(),
+                          ),
+                        );
+                      }
+                      /* setState(() {
                         email = emailCotroller.text;
                         fname = fNameCotroller.text;
                         lname = lNameCotroller.text;
                         mobileNum = mobileNumCotroller.text;
-                      });
+                      });*/
                     },
                     child: const Text('submit'),
                     color: Colors.blue,
                     elevation: 5,
                   ),
-                  Text(
-                    fname,
-                    style: style_text(),
-                  ),
-                  Text(
-                    lname,
-                    style: style_text(),
-                  ),
-                  Text(
-                    email,
-                    style: style_text(),
-                  ),
-                  Text(
-                    mobileNum,
-                    style: style_text(),
-                  ),
-                  Text(gender,style: style_text()),
-                  Center(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  Container(
+                    color: Colors.lightBlueAccent,
+                    child: Column(
                       children: [
-                        Text('hobies:   ',style: style_text(),),
-                        Text(dancing==true?'dancing ':''),
-                        Text(singing==true?'singing ':''),
-                        Text(coding==true?'coding' :''),
+                        Text(
+                          fname,
+                          style: style_text(),
+                        ),
+                        Text(
+                          lname,
+                          style: style_text(),
+                        ),
+                        Text(
+                          email,
+                          style: style_text(),
+                        ),
+                        Text(
+                          mobileNum,
+                          style: style_text(),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'blood group:    ',
+                              style: style_text(),
+                            ),
+                            Text(
+                              dropdownValue,
+                              style: style_text(),
+                            ),
+                          ],
+                        ),
+                        Text(gender, style: style_text()),
+                        Center(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'hobies:   ',
+                                style: style_text(),
+                              ),
+                              Text(dancing == true ? 'dancing ' : ''),
+                              Text(singing == true ? 'singing ' : ''),
+                              Text(coding == true ? 'coding' : ''),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
-
-
-
-
-
-
                 ],
               ),
             ),
@@ -364,7 +440,8 @@ class RegisterationDemoState extends State<RegisterationDemo> {
   }
 }
 
-TextStyle style_text({double foSize = 20, Color foColor = Colors.black87}) {
+TextStyle style_text({double foSize = 20,
+  Color foColor = Colors.black87}) {
   return TextStyle(
     fontSize: foSize,
     color: foColor,
