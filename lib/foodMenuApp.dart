@@ -68,7 +68,26 @@ class _MenuDemoState extends State<MenuDemo> {
                     ),
                   ),
                 ),
-                Image.asset(name),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: Row(
+                    children: [
+                      Expanded(child: Image.asset('assets/lavaca.jpeg',width: 200,height: 250,)),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Image.asset('assets/biryani.gif',width: 150,height: 100,),
+                            Text( 'best biryani' ,style: TextStyle(fontSize: 20,color: Colors.white),),
+                            SizedBox(height: 10,),
+                            Image.asset('assets/paneerroll.jpeg',width: 150,height: 100),
+                            Text('paneer roll',style: TextStyle(fontSize: 20,color: Colors.white),),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -82,6 +101,7 @@ class _MenuDemoState extends State<MenuDemo> {
                     ),
                   ],
                 ),
+                SizedBox(height: 10,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -90,7 +110,7 @@ class _MenuDemoState extends State<MenuDemo> {
                         productname: 'Garlic bread',
                         productPrice: 'just at \$70'),
                     image_container(
-                      productImagepath: 'assets/lava.jpeg',
+                      productImagepath: 'assets/lava1.jpeg',
                       productname: 'Choco lava Cake',
                       productPrice: 'at only \$170',
                     ),
