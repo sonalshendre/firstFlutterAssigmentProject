@@ -17,7 +17,7 @@ class RegisterationDemoState extends State<RegisterationDemo> {
   String mobileNum = '';
 
   String email = '';
-  String errorp = '';
+  String? errorp ;
 
   bool passwor = false;
   String r1 = 'male';
@@ -121,12 +121,11 @@ class RegisterationDemoState extends State<RegisterationDemo> {
                     controller: emailCotroller,
                     onChanged: (val) {
                       setState(() {
-                        errorp = val.isEmpty ? 'enter valid Email' : '';
+                        errorp = (val.isEmpty ? 'enter valid Email' : null)!;
                       });
                     },
                     decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey,
+
                       prefixIcon: const Icon(Icons.email),
                       errorText: errorp,
                       label: const Text(
@@ -153,8 +152,7 @@ class RegisterationDemoState extends State<RegisterationDemo> {
                     maxLength: 10,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey,
+
                       label: const Text(
                         'Mobile number',
                         style: TextStyle(fontSize: 20, color: Colors.black87),
@@ -185,8 +183,7 @@ class RegisterationDemoState extends State<RegisterationDemo> {
                         icon: Icon(
                             passwor ? Icons.visibility : Icons.visibility_off),
                       ),
-                      filled: true,
-                      fillColor: Colors.grey,
+
                       label: const Text(
                         'Password',
                         style: TextStyle(fontSize: 20, color: Colors.black87),
@@ -229,7 +226,7 @@ class RegisterationDemoState extends State<RegisterationDemo> {
                             value: value,
                             child: Text(
                               value,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                               ),
                             ),
@@ -302,6 +299,7 @@ class RegisterationDemoState extends State<RegisterationDemo> {
                           children: [
                             Row(
                               children: [
+
                                 Checkbox(
                                   value: dancing,
                                   onChanged: (val) {
@@ -440,8 +438,7 @@ class RegisterationDemoState extends State<RegisterationDemo> {
   }
 }
 
-TextStyle style_text({double foSize = 20,
-  Color foColor = Colors.black87}) {
+TextStyle style_text({double foSize = 20, Color foColor = Colors.black87}) {
   return TextStyle(
     fontSize: foSize,
     color: foColor,

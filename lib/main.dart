@@ -6,6 +6,7 @@ import 'StfullDemo.dart';
 import 'containerAssignment.dart';
 import 'containerDemo.dart';
 import 'dateAndTimePicker.dart';
+import 'foodMenuApp.dart';
 
 main() {
   runApp(const MaterialApp(
@@ -13,8 +14,9 @@ main() {
    // home: ContainerDemo(),
    // home:  SecondAssignment(),
    // home: StfullDemo(),
-     // home: RegisterationDemo(),
-      home:DateNTimePickerDemo(),
+    //  home: RegisterationDemo(),
+      home: MenuDemo(),
+      //home:DateNTimePickerDemo(),
   ));
 }
 
