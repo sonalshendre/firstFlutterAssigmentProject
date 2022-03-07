@@ -120,13 +120,15 @@ Widget item(
       ),
       trailing: Column(
         children: [
-          IconButton(
-            icon: Icon(fav ? Icons.favorite : Icons.favorite_border_outlined,
-                color: fav ? Colors.white : Colors.red),
-            onPressed: favorite,
-          ),
-          IconButton(onPressed: goTo , icon: Icon(Icons.add),
-          ),
+
+              GestureDetector(
+               onTap: favorite,
+                child: Icon(fav ?  Icons.favorite_border_outlined :Icons.favorite ,
+                    color: fav ?Colors.white:Colors.red ),
+              ),
+
+           GestureDetector(child: Icon(Icons.add),onTap: goTo,),
+
 
         ],
       ),
@@ -147,36 +149,36 @@ List<Map> product = [
     'image': 'assets/springroll.jpeg',
     'name': 'Veg Spring roll',
     'price': '\$ 250',
-    'favorite': 'false',
+    'favorite': false,
   },
   {
     'image': 'assets/paneerroll.jpeg',
     'name': 'Veg paneer roll',
     'price': '\$ 170',
-    'favorite': 'false',
+    'favorite': false,
   },
   {
     'image': 'assets/chikeni.jpeg',
     'name': 'fired chicken',
     'price': '\$ 150',
-    'favorite': 'false',
+    'favorite': false,
   },
   {
     'image': 'assets/garlicb.jpeg',
     'name': 'garlic bread',
     'price': '\$ 50',
-    'favorite': 'false',
+    'favorite': false,
   },
   {
     'image': 'assets/biryani.gif',
     'name': 'chicken biryani',
     'price': '\$ 150',
-    'favorite': 'false',
+    'favorite': false,
   },
   {
     'image': 'assets/HomeMadepizza.jpeg',
     'name': 'cheese burst pizza',
     'price': '\$ 250',
-    'favorite': 'false',
+    'favorite': false,
   },
 ];
