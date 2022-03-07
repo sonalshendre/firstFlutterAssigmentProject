@@ -68,6 +68,7 @@ Widget styleText({double fonSize=20, Color foColor=Colors.black87,String lable='
       fontSize:fonSize,
       color: foColor,
 
+
     ),
 
   );

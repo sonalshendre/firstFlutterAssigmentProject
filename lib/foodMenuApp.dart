@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/userInfo.dart';
+
+import 'detailPage.dart';
+import 'listOfProductPage.dart';
 
 class MenuDemo extends StatefulWidget {
   const MenuDemo({Key? key}) : super(key: key);
@@ -12,52 +16,48 @@ class _MenuDemoState extends State<MenuDemo> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-
         body: SingleChildScrollView(
           child: Container(
-            color: Color(0xFF311B92),
+            color: const Color(0xFF311B92),
             child: Column(
               children: [
-                Container(
-                  color: Colors.purple,
-                  child: Center(
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          'assets/foodDelivery.png', width: 70, height: 70,),
-                        SizedBox(width: 5,),
-                        Text('FastDelivery!', style: TextStyle(fontSize: 25),),
-                        SizedBox(width: 140,),
-                        Icon(Icons.notifications),
-                      ],
-                    ),
-                  ),
-                ),
+
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Container(
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [
-                        Color(0xFF4527A0),
-                        Color(0xff512da8),
-                        Color(0xB59C3AB7),
-                        Color(0x9C8C3AFF),
-                      ], begin: Alignment.bottomRight,
-                        end: Alignment.topLeft,),
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xFF4527A0),
+                          Color(0xff512da8),
+                          Color(0xB59C3AB7),
+                          Color(0x9C8C3AFF),
+                        ],
+                        begin: Alignment.bottomRight,
+                        end: Alignment.topLeft,
+                      ),
                     ),
                     child: Row(
                       children: [
-                        Image.asset(
-                          'assets/combos.jpeg',
-                          width: 300,
-                          height: 150,
+                        Stack(
+                          children:[Image.asset(
+                            'assets/combos.jpeg',
+                            width: 300,
+                            height: 150,
+                          ),
+                          Text( '   many combos are available in best prices...'),]
                         ),
-                        Image.asset(
-                          'assets/combo2.jpeg',
-                          width: 300,
-                          height: 150,
+                        Stack(
+                          children: [
+                            Image.asset(
+                              'assets/combo2.jpeg',
+                              width: 300,
+                              height: 150,
+                            ),
+                            Text('     special offer...')
+                          ],
                         ),
                         Image.asset(
                           'assets/combos3.jpeg',
@@ -69,25 +69,84 @@ class _MenuDemoState extends State<MenuDemo> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     children: [
-                      Expanded(child: Image.asset('assets/lavaca.jpeg',width: 200,height: 250,)),
                       Expanded(
                         child: Column(
                           children: [
-                            Image.asset('assets/biryani.gif',width: 150,height: 100,),
-                            Text( 'best biryani' ,style: TextStyle(fontSize: 20,color: Colors.white),),
-                            SizedBox(height: 10,),
-                            Image.asset('assets/paneerroll.jpeg',width: 150,height: 100),
-                            Text('paneer roll',style: TextStyle(fontSize: 20,color: Colors.white),),
+                            GestureDetector(
+                              onDoubleTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => DetailPage(
+                                            imagePath: 'assets/lavaca.jpeg',
+                                            productFname:
+                                                'choco loaded lava cake',
+                                            productFprice: '\$ 90',
+                                          )),
+                                );
+                              },
+                              child: Image.asset(
+                                'assets/lavaca.jpeg',
+                                width: 200,
+                                height: 220,
+                              ),
+                            ),
+                            const Center(
+                              child: Text(
+                                'lava cake',
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onDoubleTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductListPage(),
+                                  ),
+                                );
+                              },
+                              child: Image.asset(
+                                'assets/biryani.gif',
+                                width: 150,
+                                height: 100,
+                              ),
+                            ),
+                            const Text(
+                              'best biryani ',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            const Text(
+                              'at ony \$160',
+                              style: TextStyle(fontSize: 20, color: Colors.red),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Image.asset('assets/paneerroll.jpeg',
+                                width: 150, height: 100),
+                            const Text(
+                              'paneer roll \$75',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -101,7 +160,9 @@ class _MenuDemoState extends State<MenuDemo> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -136,28 +197,32 @@ Widget image_container({
     elevation: 1,
     shadowColor: Colors.purple,
     child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xff6a1b9a),
-
         ),
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         height: 200,
         width: 150,
-
         child: Column(
           children: [
-            Image.asset(
-              productImagepath,
-              width: 130,
-              height: 150,
+            Expanded(
+              child: GestureDetector(
+                child: Image.asset(
+                  productImagepath,
+                  width: 130,
+                  height: 150,
+                ),
+              ),
             ),
             Text(
               productname,
-              style: TextStyle(fontSize: 15, color: Colors.white),
+              style: const TextStyle(fontSize: 15, color: Colors.white),
               maxLines: 2,
             ),
-            Text(productPrice,
-              style: TextStyle(color: Colors.white),),
+            Text(
+              productPrice,
+              style: const TextStyle(color: Colors.white),
+            ),
           ],
         )),
   );

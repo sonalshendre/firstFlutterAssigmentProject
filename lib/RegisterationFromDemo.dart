@@ -40,7 +40,7 @@ class RegisterationDemoState extends State<RegisterationDemo> {
         drawer: Drawer(),
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Rgistration app'),
+          title: const Text('Registration app'),
           actions: const [
             Icon(Icons.settings),
             Icon(Icons.notifications),
