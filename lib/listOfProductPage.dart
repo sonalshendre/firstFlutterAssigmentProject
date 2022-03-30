@@ -123,11 +123,11 @@ Widget item(
 
               GestureDetector(
                onTap: favorite,
-                child: Icon(fav ?  Icons.favorite_border_outlined :Icons.favorite ,
-                    color: fav ?Colors.white:Colors.red ),
+                child: Icon(fav ? Icons.favorite: Icons.favorite_border_outlined ,
+                    color: fav ?Colors.red:Colors.white ),
               ),
 
-           GestureDetector(child: Icon(Icons.add),onTap: goTo,),
+           GestureDetector(child: Text('view detail'),onTap: goTo,),
 
 
         ],

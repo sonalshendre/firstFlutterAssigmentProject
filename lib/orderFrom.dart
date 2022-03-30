@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/thankyou.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class OrderFormDemo extends StatefulWidget {
   OrderFormDemo({Key? key, this.product_Name = ''}) : super(key: key);
   String product_Name = '';
 
   @override
-  _OrderFormDemoState createState() => _OrderFormDemoState();
+  OrderFormDemoState createState() => OrderFormDemoState();
 }
 
-class _OrderFormDemoState extends State<OrderFormDemo> {
-
+class OrderFormDemoState extends State<OrderFormDemo> {
+  bool pass = false;
+  String error = '';
+  bool success = false;
   GlobalKey<FormState> key = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  String email = '';
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +49,7 @@ class _OrderFormDemoState extends State<OrderFormDemo> {
                   width: 10,
                 ),
                 TextFormField(
+                  controller: emailController,
                   validator: (val) {
                     return val!.isEmpty ? 'Please Enter valid email' : null;
                   },
@@ -63,34 +73,52 @@ class _OrderFormDemoState extends State<OrderFormDemo> {
                   width: 10,
                 ),
                 TextFormField(
+                  controller: passwordController,
                   keyboardType: TextInputType.number,
                   decoration: inputField(
-                      hintext: 'Enter Your Mobile Number',
-                      lable: 'Mobile Number'),
+                      hintext: 'Enter Your password',
+                      lable: 'password'),
                 ),
                 SizedBox(
                   width: 10,
                 ),
-                TextFormField(
-                  decoration:
-                      inputField(hintext: 'Description', lable: 'order Detail'),
-                ),
+
                 MaterialButton(
                   onPressed: () {
                     if (key.currentState!.validate()) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ThanksPage(
-                            user_name: nameController.text,
-                          ),
-                        ),
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return SimpleDialog(
+                            title: Text('Do you want to continue'),
+                            children: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ThanksPage(
+                                              user_name: nameController.text,
+                                            ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text('ok')),
+                              TextButton(onPressed: () {
+                                Navigator.pop(context);
+                              }, child: Text('cancel'))
+                            ],
+                          );
+                        },
                       );
                     }
                   },
                   textColor: Colors.white,
                   color: Colors.redAccent,
                   child: Text('submit'),
-                )
+                ),
+
+
               ],
             ),
           ),
@@ -98,8 +126,11 @@ class _OrderFormDemoState extends State<OrderFormDemo> {
       ),
     );
   }
-}
 
+
+  }
+
+  @override
 InputDecoration inputField({
   String hintext = '',
   String lable = '',
@@ -121,8 +152,8 @@ InputDecoration inputField({
     ),
     border: OutlineInputBorder(
         borderSide: BorderSide(
-      width: 2,
-      color: Colors.black,
-    )),
+          width: 2,
+          color: Colors.black,
+        )),
   );
 }
